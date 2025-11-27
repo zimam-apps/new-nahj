@@ -10,10 +10,9 @@
 /storage/*.key
 /storage/framework/
 /storage/logs/
-/database/
 /public/
-/tests/
 
+ 
 
 # ========================================
 # Environment & Config
