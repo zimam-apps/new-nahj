@@ -48,8 +48,11 @@ RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache || true
 # Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
+ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV LARAVEL_PACKAGE_DISCOVERY=false
 # Install composer dependencies
 RUN composer install --no-dev --optimize-autoloader --no-interaction
 
 EXPOSE 80
 CMD ["apache2-foreground"]
+ 
