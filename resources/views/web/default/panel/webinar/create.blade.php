@@ -5,7 +5,7 @@
 @endpush
 
 @section('content')
-    <div class="">
+    <div class=""> 
 
         <form method="post" action="/panel/webinars/{{ !empty($webinar) ? $webinar->id .'/update' : 'store' }}" id="webinarForm" class="webinar-form">
             @include('web.default.panel.webinar.create_includes.progress')
