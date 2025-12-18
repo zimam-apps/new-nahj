@@ -1,10 +1,8 @@
-@extends(getTemplate().'.layouts.app')
+@extends(getTemplate() . '.layouts.app')
 
 
 @section('content')
-
-
-    @if(!empty($order) && $order->status === \App\Models\Order::$paid)
+    @if (!empty($order) && $order->status === \App\Models\Order::$paid)
         <div class="no-result default-no-result my-50 d-flex align-items-center justify-content-center flex-column">
             <div class="no-result-logo">
                 <img src="/assets/default/img/no-results/search.png" alt="">
@@ -17,7 +15,7 @@
         </div>
     @endif
 
-    @if(!empty($order) && $order->status === \App\Models\Order::$fail)
+    @if (!empty($order) && $order->status === \App\Models\Order::$fail)
         <div class="no-result status-failed my-50 d-flex align-items-center justify-content-center flex-column">
             <div class="no-result-logo">
                 <img src="/assets/default/img/no-results/failed_pay.png" alt="">
@@ -29,6 +27,20 @@
             </div>
         </div>
     @endif
-
-
 @endsection
+
+@push('scripts_bottom')
+
+    @if (!empty($order) && $order->status === \App\Models\Order::$paid)
+        <!-- Event snippet for Purchase conversion page -->
+        <script>
+            gtag('event', 'conversion', {
+                'send_to': 'AW-17791157195/gV7pCO6x7M8bEMuHvqNC',
+                'value': {{ $order->status == \App\Models\Order::$paid ? $order->total_amount : 0 }},
+                'currency': 'SAR',
+                'transaction_id': ''
+            });
+        </script>
+    @endif
+
+@endpush

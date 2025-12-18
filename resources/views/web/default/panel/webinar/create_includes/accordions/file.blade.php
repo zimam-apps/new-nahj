@@ -229,7 +229,7 @@
 
                         </div>
                     </div>
-
+ 
                     <div class="mt-30 d-flex align-items-center">
                         <button type="button" class="js-save-file btn btn-sm btn-primary">{{ trans('public.save') }}</button>
 

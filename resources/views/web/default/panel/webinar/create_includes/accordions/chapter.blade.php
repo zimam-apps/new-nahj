@@ -2,11 +2,14 @@
     <div class="col-12">
         <div class="accordion-content-wrapper mt-15" id="chapterAccordion{{ !empty($chapter) ? $chapter->id :'' }}" role="tablist" aria-multiselectable="true">
             @if(!empty($webinar->chapters) and count($webinar->chapters))
-                <ul class="draggable-content-lists draggable-lists-chapter" data-drag-class="draggable-lists-chapter" data-order-table="webinar_chapters">
+                <ul class="draggable-content-lists draggable-lists-chapter" data-drag-class="draggable-lists-chapter"
+                 data-order-table="webinar_chapters">
+
                     @foreach($webinar->chapters as $chapter)
 
                         <li data-id="{{ !empty($chapter) ? $chapter->id :'' }}" data-chapter-order="{{ $chapter->order }}" class="accordion-row bg-white rounded-sm panel-shadow mt-20 py-15 py-lg-30 px-10 px-lg-20">
-                            <div class="d-flex align-items-center justify-content-between " role="tab" id="chapter_{{ !empty($chapter) ? $chapter->id :'record' }}">
+                            <div class="d-flex align-items-center justify-content-between " role="tab"
+                             id="chapter_{{ !empty($chapter) ? $chapter->id :'record' }}">
                                 <div class="d-flex align-items-center" href="#collapseChapter{{ !empty($chapter) ? $chapter->id :'record' }}" aria-controls="collapseChapter{{ !empty($chapter) ? $chapter->id :'record' }}" data-parent="#chapterAccordion" role="button" data-toggle="collapse" aria-expanded="true">
                                     <span class="chapter-icon ml-10">
                                         <i data-feather="grid" class=""></i>
@@ -26,6 +29,7 @@
                                         <span class="disabled-content-badge ml-10">{{ trans('public.disabled') }}</span>
                                     @endif
 
+                                    {{-- this is the add content button --}}
                                     <div class="btn-group dropdown table-actions">
                                         <button type="button" class="add-course-content-btn ml-10 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i data-feather="plus" class=""></i>
@@ -57,7 +61,8 @@
                                             </button>
 
                                             @if(getFeaturesSettings('webinar_assignment_status'))
-                                                <button type="button" class="js-add-course-content-btn d-block mb-10 btn-transparent" data-webinar-id="{{ $webinar->id }}" data-type="assignment" data-chapter="{{ !empty($chapter) ? $chapter->id :'' }}">
+                                                <button type="button" class="js-add-course-content-btn d-block mb-10 btn-transparent" data-webinar-id="{{ $webinar->id }}"
+                                                     data-type="assignment" data-chapter="{{ !empty($chapter) ? $chapter->id :'' }}">
                                                     {{ trans('update.add_new_assignments') }}
                                                 </button>
                                             @endif
@@ -78,8 +83,10 @@
                                 </div>
                             </div>
 
-                            <div id="collapseChapter{{ !empty($chapter) ? $chapter->id :'record' }}" aria-labelledby="chapter_{{ !empty($chapter) ? $chapter->id :'record' }}" class=" collapse show" role="tabpanel">
-                                <div class="panel-collapse text-gray">
+                            <div id="collapseChapter{{ !empty($chapter) ? $chapter->id :'record' }}"
+                                 aria-labelledby="chapter_{{ !empty($chapter) ? $chapter->id :'record' }}" 
+                                class=" collapse show" role="tabpanel">
+                                <div class="panel-collapse text-gray"> 
 
                                     <div class="accordion-content-wrapper mt-15" id="chapterContentAccordion{{ !empty($chapter) ? $chapter->id :'' }}" role="tablist" aria-multiselectable="true">
                                         @if(!empty($chapter->chapterItems) and count($chapter->chapterItems))
@@ -111,6 +118,7 @@
                             </div>
                         </li>
                     @endforeach
+                    
                 </ul>
             @else
                 @include(getTemplate() . '.includes.no-result',[

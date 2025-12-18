@@ -72,15 +72,15 @@
             </div>
 
         </div>
-    </div>
+    </div> 
 @endsection
 
 @push('scripts_bottom')
     <script src="/assets/default/vendors/select2/select2.min.js"></script>
     <script src="/assets/default/js/parts/forgot_password.min.js"></script>
-    <!-- Event snippet for تسجيل دخول conversion page -->
+    <!-- Event snippet for login conversion page -->
     <script>
-    gtag('event', 'conversion', {'send_to': 'AW-16805556842/7xoECIum3_sZEOrkwc0-'});
+    gtag('event', 'conversion', {'send_to': 'AW-17791157195/aXOwCKqd7M8bEMuHvqNC'});
     </script>
 
 @endpush
