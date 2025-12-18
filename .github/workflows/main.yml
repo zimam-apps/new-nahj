@@ -1,47 +1,34 @@
-name: Laravel
-
+name: Deploy Application
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  laravel-tests:
-
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.4'
+    - name: Checkout Code
+      uses: actions/checkout@v3
 
-      - uses: actions/checkout@v4
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.2
 
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-      - name: Install Dependencies
-        run: composer install --no-dev --optimize-autoloader
-
-      - name: Generate key
-        run: php artisan key:generate
-
-      - name: Directory Permissions
-        run: chmod -R 777 storage bootstrap/cache
-        # --- NEW STEP: FORCE UPLOAD ALL FILES ---
-      - name: Remove .gitignore to force upload everything
-        run: rm .gitignore
-      # ----------------------------------------
-
-      - name: Deploy to Shared Hosting (Demo)
-        uses: SamKirkland/FTP-Deploy-Action@v4.0.0
-        with:
-          server: 147.93.25.54
-          username: u766532697.t
-          password: '!ZlaLS$[QW22xUi1'
-          server-dir: /home/u766532697/domains/te.maidan.events/public_html/
-          exclude: |
-            **/.git*
-            **/node_modules/**
-            **/tests/**
+    - name: Deploy Using SSH
+      uses: appleboy/ssh-action@v0.1.9
+      with:
+        host: 147.93.25.54
+        username: u766532697
+        password: y7d2J/zf2m1M
+        port: 65002
+        
+        script: |
+          cd /public_html/
+          git pull origin main
+          composer install --optimize-autoloader --no-dev --no-progress --no-interaction --prefer-dist
+          php artisan migrate --force
+          php artisan optimize:clear
