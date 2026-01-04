@@ -107,7 +107,7 @@ class RegisterController extends Controller
         // ];
            $rules = [
             'country_code' => ($registerMethod == 'mobile') ? 'required' : 'nullable',
-            'mobile' => (($registerMethod == 'mobile') ? 'required' : 'nullable').'|numeric|unique:users',
+            'mobile' => (($registerMethod == 'mobile') ? 'required' : 'required').'|numeric|unique:users',
             'email' => (($registerMethod == 'email') ? 'required' : 'nullable').'|email|max:255|unique:users',
             'term' => 'required',
 
