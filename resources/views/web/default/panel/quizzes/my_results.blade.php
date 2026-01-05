@@ -164,18 +164,26 @@
                                                 </div>
                                             </div>
                                         </td> -->
+
                                         <td class="text-left">
                                             <span class="d-block">{{ $result->quiz->title }}</span>
                                             <span class="font-12 text-gray d-block">{{ $result->quiz->webinar->title }}</span>
                                         </td>
+
                                         <td class="align-middle">{{ $result->quiz->quizQuestions->sum('grade') }}</td>
 
-                                        <td class="align-middle">{{ $result->user_grade }}</td>
+                                        @if ($result->quiz->show_result_to_student)
+                                            <td class="align-middle">{{ $result->user_grade }}</td> 
+                                            {{-- TODO: Add logic for displaying user grade when status is not waiting --}}
+                                            
+                                        @else
+                                            <td class="align-middle">-</td>
+                                        @endif
 
                                         <td class="align-middle">
-                                        <span class="d-block text-{{ ($result->status == 'passed') ? 'primary' : ($result->status == 'waiting' ? 'warning' : 'danger') }}">
-                                            {{ trans('quiz.'.$result->status) }}
-                                        </span>
+                                            <span class="d-block text-{{ ($result->status == 'passed') ? 'primary' : ($result->status == 'waiting' ? 'warning' : 'danger') }}">
+                                                {{ trans('quiz.'.$result->status) }}
+                                            </span>
 
                                             @if($result->status =='failed' and $result->can_try)
                                                 <span class="d-block font-12 text-gray">{{ trans('quiz.quiz_chance_remained',['count' => $result->count_can_try]) }}</span>

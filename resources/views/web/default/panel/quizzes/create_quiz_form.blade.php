@@ -1,6 +1,5 @@
 {{-- @dd($quiz) --}}
 
-<div class="">
     <div data-action="{{ !empty($quiz) ? '/panel/quizzes/' . $quiz->id . '/update' : '/panel/quizzes/store' }}"
         class="js-content-form quiz-form webinar-form">
 
@@ -331,5 +330,3 @@
         @include(getTemplate() . '.panel.quizzes.modals.multiple_question', ['quiz' => $quiz])
         @include(getTemplate() . '.panel.quizzes.modals.descriptive_question', ['quiz' => $quiz])
     @endif
-
-
